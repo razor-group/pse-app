@@ -1,0 +1,27 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-psewebapp-dev-150953-authRole",
+      "UnauthRoleArn": "arn:aws:iam::323705899659:role/amplify-psewebapp-dev-150953-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::323705899659:role/amplify-psewebapp-dev-150953-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-psewebapp-dev-150953-deployment",
+      "UnauthRoleName": "amplify-psewebapp-dev-150953-unauthRole",
+      "StackName": "amplify-psewebapp-dev-150953",
+      "StackId": "arn:aws:cloudformation:eu-central-1:323705899659:stack/amplify-psewebapp-dev-150953/302b2bb0-c72f-11ee-9e5c-02e9ee511e6f",
+      "AmplifyAppId": "d3hlaidfb6d8in"
+    },
+    "categories": {
+      "auth": {
+        "psewebapp8f1cb0e1": {},
+        "psewebappa20238d3": {},
+        "psewebappe621ff62": {
+          "userPoolId": "eu-central-1_ihrbzAYJz",
+          "userPoolName": "razorPSE-prod-webAppUsers",
+          "webClientId": "3r7rblkv5okfug0og7m4parel7",
+          "nativeClientId": "3r7rblkv5okfug0og7m4parel7"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+import * as React from "react";
+const SvgStat = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    {...props}
+  >
+    <rect
+      width={4}
+      height={13}
+      x={18}
+      y={7}
+      stroke={props.color}
+      strokeLinejoin="round"
+      rx={1}
+    />
+    <rect
+      width={4}
+      height={7}
+      x={10}
+      y={13}
+      stroke={props.color}
+      strokeLinejoin="round"
+      rx={1}
+    />
+    <rect
+      width={4}
+      height={11}
+      x={2}
+      y={9}
+      stroke={props.color}
+      strokeLinejoin="round"
+      rx={1}
+    />
+  </svg>
+);
+export default SvgStat;

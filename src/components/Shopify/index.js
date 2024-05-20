@@ -12,7 +12,6 @@ const backend_endpoint = 'https://main.dm1f71wjz3iyf.amplifyapp.com'
 const titles = [
     "Uploaded On",
     "File Name",
-    "Who Uploaded",
     "No. of SKUs",
     "Status",
     "Action"
@@ -57,7 +56,6 @@ const titles = [
         newData.push({
           "Uploaded On": JSON.parse(items[i].data).upload_time,
           "File Name": JSON.parse(items[i].data).file_name,
-          "Who Uploaded": "XXXXX",
           "No. of SKUs": JSON.parse(items[i].data).responsedata.length,
           "status":JSON.parse(items[i].data).status || 'Pending',
           "id":items[i].u_id

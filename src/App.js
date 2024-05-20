@@ -57,6 +57,7 @@ export default function App() {
           }
         >
           <Route path="/coupon-upload" element={<CouponUpload />} />
+          <Route path="/" element={<ShopifyUpload />} />
           <Route path="/shopify-coupon-upload" element={<ShopifyUpload />} />
         </Route>
 

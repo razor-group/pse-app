@@ -188,7 +188,7 @@ const handleUpload = async () => {
       <FileUpload
         setFileName={setFileName}
         fileType={[".xlsx"]}
-        fileSize={1}
+        fileSize={3}
         height={"min-h-[240px]"}
         fileText={"Drop Files here to upload"}
         onValidate={handleFileValidation}

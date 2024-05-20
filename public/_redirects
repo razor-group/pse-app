@@ -1,0 +1,2 @@
+// public/_redirects or at the root if no public directory exists
+/*    /index.html   200

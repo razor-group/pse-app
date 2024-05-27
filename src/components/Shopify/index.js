@@ -155,6 +155,7 @@ const handleUpload = async () => {
           <div className="mt-24 pl-2">
             <h1 className="text-subtitle font-semibold">Pre Uploaded Files</h1>
             <p>A list of all the pre-uploaded files with coupon details.</p>
+            <p><b><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></b></p>
             </div>
           <Card titles={titles} data={data} btn={btn} setCurrentComponent={setCurrentComponent} fetchDetailedCouponData={fetchDetailedCouponData}  customClass={'mt-4'} />
         </>

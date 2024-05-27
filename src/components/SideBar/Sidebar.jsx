@@ -173,7 +173,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             <h3 className="text-indigo-600 font-bold" hidden>
               Price Pulse Portal
             </h3>
-            <h3 className="text-indigo-600 font-bold">Coupon Upload</h3>
+            <h3 className="text-indigo-600 font-bold">Coupon Upload <small>(v1.0.0)</small></h3>
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">

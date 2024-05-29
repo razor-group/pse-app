@@ -42,7 +42,7 @@ function Card({ data, titles, btn, customClass, setCurrentComponent,fetchDetaile
                           )
                         ))}
                         {btn && (
-                          <td className="relative py-4 pl-3 pr-4  sm:pr-6">
+                          <td className="relative py-4 pl-3 pr-4  sm:pr-6 display-flex">
                             <Button
                               onClick={() => {
                                 setCurrentComponent('detailedcoupon');
@@ -51,7 +51,16 @@ function Card({ data, titles, btn, customClass, setCurrentComponent,fetchDetaile
                               color={"currentcolor"}
                               iconClass={"text-white"}
                               text={"View"}
-                              btnClass={"PrimaryBtn ml-2 btn"}
+                              btnClass={"PrimaryBtn ml-2 btn left-view-btn"}
+                            />
+                            <Button
+                              onClick={() => {
+                                window.location.reload()
+                            }}
+                              color={"currentcolor"}
+                              iconClass={"text-white"}
+                              text={"Refresh"}
+                              btnClass={"ml-2 right-view-btn"}
                             />
                           </td>
                         )}

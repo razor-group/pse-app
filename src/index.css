@@ -74,3 +74,17 @@ body {
 .DotStatusYellow .statusDot{
   @apply bg-StatusYellow-300;
 }
+.left-view-btn,.right-view-btn{
+  width: 45%;
+    min-width: auto;
+}
+.left-view-btn{
+float: left;
+}
+.right-view-btn{
+  float: right;
+  color:rgb(0 53 233 / var(--tw-bg-opacity));
+  }
+  .display-flex{
+    display:flex;
+  }

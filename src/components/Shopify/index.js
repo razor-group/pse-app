@@ -99,7 +99,7 @@ const handleUpload = async () => {
       try {
           const formData = new FormData();
           formData.append('file', selectedFile);
-          alert('Request initiated successfully. Please comeback after 30 minutes.');
+          alert('Request initiated successfully. Please comeback after few minutes');
           setTimeout(function(){
             setCurrentComponent("home");
             window.location.reload();
@@ -155,7 +155,7 @@ const handleUpload = async () => {
           <div className="mt-24 pl-2">
             <h1 className="text-subtitle font-semibold">Pre Uploaded Files</h1>
             <p>A list of all the pre-uploaded files with coupon details.</p>
-            <p style={{fontSize: '12px'}}><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></p>
+            <p style={{fontSize: '10px',marginTop:'10px'}}><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></p>
             </div>
           <Card titles={titles} data={data} btn={btn} setCurrentComponent={setCurrentComponent} fetchDetailedCouponData={fetchDetailedCouponData}  customClass={'mt-4'} />
         </>

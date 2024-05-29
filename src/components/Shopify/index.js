@@ -57,7 +57,7 @@ const titles = [
           "Uploaded On": JSON.parse(items[i].data).upload_time,
           "File Name": JSON.parse(items[i].data).file_name,
           "No. of SKUs": JSON.parse(items[i].data).responsedata.length,
-          "status":JSON.parse(items[i].data).status || 'Pending',
+          "status":JSON.parse(items[i].data).status || 'WIP',
           "id":items[i].u_id
         });
       }
@@ -155,7 +155,7 @@ const handleUpload = async () => {
           <div className="mt-24 pl-2">
             <h1 className="text-subtitle font-semibold">Pre Uploaded Files</h1>
             <p>A list of all the pre-uploaded files with coupon details.</p>
-            <p><b><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></b></p>
+            <p style={{fontSize: '12px'}}><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></p>
             </div>
           <Card titles={titles} data={data} btn={btn} setCurrentComponent={setCurrentComponent} fetchDetailedCouponData={fetchDetailedCouponData}  customClass={'mt-4'} />
         </>

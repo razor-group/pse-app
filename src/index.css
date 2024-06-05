@@ -88,3 +88,15 @@ float: left;
   .display-flex{
     display:flex;
   }
+  .align-right{
+    margin-left: auto;
+  }
+  .delete-sku-btn[disabled]{
+    display:none;
+  }
+  .select-all-checkbox,.sku-checkbox{
+    margin-right:8px;
+  }
+  [data-disabled=true]{
+    opacity: 0.5;
+  }

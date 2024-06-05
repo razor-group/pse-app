@@ -9,6 +9,7 @@ import axios from "axios";
 import { parse } from 'date-fns';
 import io from "socket.io-client";
 const backend_endpoint = 'https://main.dm1f71wjz3iyf.amplifyapp.com'
+//const backend_endpoint = 'http://localhost:3001'
 const titles = [
     "Uploaded On",
     "File Name",
@@ -17,6 +18,7 @@ const titles = [
     "Action"
   ];
   const detailed_titles = [
+    "id",
     "SKU (ASINxMP)",
     "Store (BrandxMP)",
     "Coupon Title",
@@ -35,6 +37,8 @@ const titles = [
   const [data, setData] = useState([]);
   const [detailedCouponData, setDetailedCouponData] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
   const [isFileValid, setIsFileValid] = useState(false);
   const [Filename, setFileName] = useState("");
   const [currentComponent, setCurrentComponent] = useState("home");
@@ -78,6 +82,7 @@ const titles = [
         let items = JSON.parse(response.data[0].data).responsedata;
         for(let i = 0; i < items.length; i++){
           newData.push({
+            "id":id,
             "SKU (ASINxMP)":items[i].sku,
             "Store (BrandxMP)":items[i].store,
             "Coupon Title":items[i].title,
@@ -92,6 +97,78 @@ const titles = [
     } catch (error) {
         console.error("Error fetching detailed coupon data:", error);
     }
+};
+
+const updateDiscount = async () => {
+  
+};
+const handleCheckboxChange = (sku, store) => {
+  const key = `${sku}-${store}`;
+  if (selectedCheckboxes.includes(key)) {
+      setSelectedCheckboxes(prevSelected => prevSelected.filter(item => item !== key));
+  } else {
+      setSelectedCheckboxes(prevSelected => [...prevSelected, key]);
+  }
+};
+
+useEffect(() => {
+  const selectAllCheckbox = document.querySelector(".select-all-checkbox");
+  if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener("change", handleSelectAllChange);
+      return () => {
+          selectAllCheckbox.removeEventListener("change", handleSelectAllChange);
+      };
+  }
+}, [selectedCheckboxes]);
+
+const handleSelectAllChange = () => {
+  const selectAllCheckbox = document.querySelector(".select-all-checkbox");
+  const checkboxes = document.querySelectorAll(".sku-checkbox:not([disabled])");
+
+  if (selectAllCheckbox.checked) {
+      checkboxes.forEach(checkbox => {
+          checkbox.checked = true;
+          const key = checkbox.getAttribute("data-key");
+          if (!selectedCheckboxes.includes(key)) {
+              setSelectedCheckboxes(prevSelected => [...prevSelected, key]);
+          }
+      });
+  } else {
+      checkboxes.forEach(checkbox => {
+          checkbox.checked = false;
+      });
+      setSelectedCheckboxes([]);
+  }
+};
+
+const isButtonEnabled = selectedCheckboxes.length > 0;
+
+const handleDeleteButtonClick = async () =>  {
+  const selectedAttributes = [];
+  document.querySelectorAll(".sku-checkbox:checked").forEach(checkbox => {
+      if (!checkbox.classList.contains("select-all-checkbox")) {
+          selectedAttributes.push({
+              upload_id:checkbox.getAttribute("data-id"),
+              sku: checkbox.getAttribute("data-sku"),
+              store: checkbox.getAttribute("data-store"),
+              percentage: checkbox.getAttribute("data-percentage")
+          });
+      }
+  });
+  try {
+    const response = axios.post(`${backend_endpoint}/deletediscount`, { selectedAttributes }, {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+  alert('Request initiated successfully. Please comeback after few minutes');
+          setTimeout(function(){
+            setCurrentComponent("home");
+            window.location.reload();
+          },2000)
+} catch (error) {
+    console.error("Error deleting discounts:", error);
+}
 };
 
 const handleUpload = async () => {
@@ -157,7 +234,7 @@ const handleUpload = async () => {
             <p>A list of all the pre-uploaded files with coupon details.</p>
             <p style={{fontSize: '12px',marginTop:'10px'}}><i>*Only the discount codes marked as "running" in the uploaded sheet will be considered for processing.</i></p>
             </div>
-          <Card titles={titles} data={data} btn={btn} setCurrentComponent={setCurrentComponent} fetchDetailedCouponData={fetchDetailedCouponData}  customClass={'mt-4'} />
+          <Card titles={titles} data={data} btn={btn} setCurrentComponent={setCurrentComponent} fetchDetailedCouponData={fetchDetailedCouponData} updateDiscount={updateDiscount} handleUpload={handleUpload}  customClass={'mt-4'} />
         </>
       ) : currentComponent === "detailedcoupon" ? 
       (
@@ -170,7 +247,8 @@ const handleUpload = async () => {
         onClick={() => setCurrentComponent('home')}
         btnClass={"BackState flex items-center pb-4"}
       />
-      <Card titles={detailed_titles} data={detailedCouponData} fetchDetailedCouponData={fetchDetailedCouponData} setCurrentComponent={setCurrentComponent} customClass={'mt-4'} /> 
+      <button disabled={!isButtonEnabled} onClick={handleDeleteButtonClick} class={"delete-sku-btn flex items-center pb-4 align-right btn PrimaryBtn"}>Deactivate</button>
+      <Card titles={detailed_titles} data={detailedCouponData} fetchDetailedCouponData={fetchDetailedCouponData} setCurrentComponent={setCurrentComponent} handleCheckboxChange={handleCheckboxChange} selectedCheckboxes={selectedCheckboxes} selectAll={selectAll} handleSelectAllChange={handleSelectAllChange} customClass={'mt-4'} /> 
       </>
       ) : 
     (

@@ -36,6 +36,7 @@ const titles = [
  function ShopifyUpload() {
   const [data, setData] = useState([]);
   const [detailedCouponData, setDetailedCouponData] = useState(null);
+  const [currentBreadcrumb, setBreadcrumb] = useState(0);
   const [socket, setSocket] = useState(null);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -50,7 +51,6 @@ const titles = [
   const handleBack = () => {
     navigate(-1);
   };
-
   async function getData() {
     try {
       const response = await axios.get(`${backend_endpoint}/uploaddata`);
@@ -94,6 +94,7 @@ const titles = [
         }
         setDetailedCouponData(newData);
         setCurrentComponent("detailedcoupon");
+        setBreadcrumb(JSON.parse(response.data[0].data).file_name +' '+ JSON.parse(response.data[0].data).upload_time);
     } catch (error) {
         console.error("Error fetching detailed coupon data:", error);
     }
@@ -162,10 +163,10 @@ const handleDeleteButtonClick = async () =>  {
       }
   });
   alert('Request initiated successfully. Please comeback after few minutes');
-          setTimeout(function(){
-            setCurrentComponent("home");
-            window.location.reload();
-          },2000)
+          // setTimeout(function(){
+          //   setCurrentComponent("home");
+          //   window.location.reload();
+          // },2000)
 } catch (error) {
     console.error("Error deleting discounts:", error);
 }
@@ -247,7 +248,10 @@ const handleUpload = async () => {
         onClick={() => setCurrentComponent('home')}
         btnClass={"BackState flex items-center pb-4"}
       />
+      <div className="detailed-top-bar display-flex">
+      <div className="breadcrumb"><span onClick={() => setCurrentComponent('home')}>Home</span> / {currentBreadcrumb}</div>
       <button disabled={!isButtonEnabled} onClick={handleDeleteButtonClick} class={"delete-sku-btn flex items-center pb-4 align-right btn PrimaryBtn"}>Deactivate</button>
+      </div>
       <Card titles={detailed_titles} data={detailedCouponData} fetchDetailedCouponData={fetchDetailedCouponData} setCurrentComponent={setCurrentComponent} handleCheckboxChange={handleCheckboxChange} selectedCheckboxes={selectedCheckboxes} selectAll={selectAll} handleSelectAllChange={handleSelectAllChange} customClass={'mt-4'} /> 
       </>
       ) : 

@@ -100,3 +100,13 @@ float: left;
   [data-disabled=true]{
     opacity: 0.5;
   }
+  .detailed-top-bar {
+    align-items: center;
+    padding-left:5px;
+}
+.breadcrumb span{
+  cursor: pointer;
+}
+.breadcrumb {
+  opacity: 0.7;
+}

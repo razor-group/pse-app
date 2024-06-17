@@ -163,10 +163,10 @@ const handleDeleteButtonClick = async () =>  {
       }
   });
   alert('Request initiated successfully. Please comeback after few minutes');
-          // setTimeout(function(){
-          //   setCurrentComponent("home");
-          //   window.location.reload();
-          // },2000)
+          setTimeout(function(){
+            setCurrentComponent("home");
+            window.location.reload();
+          },2000)
 } catch (error) {
     console.error("Error deleting discounts:", error);
 }
